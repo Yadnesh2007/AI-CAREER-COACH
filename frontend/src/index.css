@@ -1,0 +1,529 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600&family=Playfair+Display:ital,wght@0,700;0,900;1,700&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* =============================================
+   DESIGN SYSTEM: EDITORIAL × MINIMAL
+   60% Background | 30% Surface | 10% Accent
+   ============================================= */
+
+@layer base {
+  :root {
+    /* 60% Background — Deep off-black, not pure #000 */
+    --bg-primary: #0A0A0B;
+    --bg-primary-rgb: 10, 10, 11;
+
+    /* 30% Surface — Subtle warm grey layers */
+    --surface-1: #111113;
+    --surface-2: #18181B;
+    --surface-3: #1E1E23;
+    --surface-border: rgba(255,255,255,0.06);
+    --surface-border-hover: rgba(255,255,255,0.12);
+
+    /* 10% Accent — Refined, not neon */
+    --accent: #E8C547;        /* Editorial gold */
+    --accent-2: #7C9CF5;      /* Soft indigo */
+    --accent-3: #5DDCB4;      /* Muted mint */
+    --accent-rgb: 232, 197, 71;
+
+    /* Typography */
+    --text-primary: #F4F4F5;
+    --text-secondary: #A1A1AA;
+    --text-muted: #52525B;
+    --text-accent: #E8C547;
+
+    /* Status */
+    --status-green: #22C55E;
+    --status-amber: #F59E0B;
+    --status-red: #EF4444;
+    --status-blue: #60A5FA;
+
+    /* Transitions */
+    --ease-spring: cubic-bezier(0.34, 1.56, 0.64, 1);
+    --ease-smooth: cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  * {
+    box-sizing: border-box;
+  }
+
+  html {
+    font-size: 16px;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  body {
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+    background-color: var(--bg-primary);
+    color: var(--text-primary);
+    overflow-x: hidden;
+    line-height: 1.6;
+  }
+
+  ::selection {
+    background: rgba(232, 197, 71, 0.25);
+    color: #F4F4F5;
+  }
+}
+
+/* =============================================
+   SCROLLBAR — Refined
+   ============================================= */
+::-webkit-scrollbar { width: 4px; height: 4px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: var(--surface-3); border-radius: 2px; }
+::-webkit-scrollbar-thumb:hover { background: var(--accent); opacity: 0.4; }
+
+/* =============================================
+   TYPOGRAPHY — Editorial scale
+   ============================================= */
+.font-display { font-family: 'Playfair Display', Georgia, serif; }
+.font-mono { font-family: 'JetBrains Mono', 'Fira Code', monospace; }
+.font-sans { font-family: 'Inter', sans-serif; }
+
+.text-balance { text-wrap: balance; }
+
+/* =============================================
+   SURFACE SYSTEM — 3-layer depth model
+   ============================================= */
+
+/* Layer 0 — Background */
+.bg-app { background: var(--bg-primary); }
+
+/* Layer 1 — Cards & panels */
+.panel {
+  background: var(--surface-1);
+  border: 1px solid var(--surface-border);
+  border-radius: 12px;
+}
+
+/* Layer 2 — Nested elements */
+.panel-inner {
+  background: var(--surface-2);
+  border: 1px solid var(--surface-border);
+  border-radius: 8px;
+}
+
+/* Layer 3 — Code blocks, chips */
+.panel-deep {
+  background: var(--surface-3);
+  border: 1px solid var(--surface-border);
+  border-radius: 6px;
+}
+
+/* Interactive states */
+.panel-interactive {
+  transition: border-color 220ms ease, box-shadow 220ms ease, transform 220ms var(--ease-smooth);
+}
+.panel-interactive:hover {
+  border-color: var(--surface-border-hover);
+  box-shadow: 0 0 0 1px rgba(255,255,255,0.04), 0 8px 32px rgba(0,0,0,0.4);
+}
+.panel-interactive:active { transform: translateY(1px); }
+
+/* =============================================
+   ACCENT COMPONENTS
+   ============================================= */
+
+/* Gold accent line — editorial signature */
+.accent-line {
+  width: 28px;
+  height: 2px;
+  background: var(--accent);
+  border-radius: 1px;
+}
+
+/* Status pill */
+.status-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 3px 10px;
+  border-radius: 999px;
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.02em;
+  font-family: 'JetBrains Mono', monospace;
+}
+
+.status-demonstrated {
+  background: rgba(34, 197, 94, 0.10);
+  color: #4ADE80;
+  border: 1px solid rgba(34, 197, 94, 0.20);
+}
+
+.status-partial {
+  background: rgba(245, 158, 11, 0.10);
+  color: #FCD34D;
+  border: 1px solid rgba(245, 158, 11, 0.20);
+}
+
+.status-not-demonstrated {
+  background: rgba(239, 68, 68, 0.10);
+  color: #F87171;
+  border: 1px solid rgba(239, 68, 68, 0.20);
+}
+
+.status-unable {
+  background: rgba(96, 165, 250, 0.10);
+  color: #93C5FD;
+  border: 1px solid rgba(96, 165, 250, 0.20);
+}
+
+/* =============================================
+   BUTTONS — Precise & Purposeful
+   ============================================= */
+
+.btn-primary {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 9px 18px;
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 0.01em;
+  color: #0A0A0B;
+  background: var(--accent);
+  border: 1px solid transparent;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 180ms ease;
+}
+.btn-primary:hover { background: #F0CE57; box-shadow: 0 0 24px rgba(232,197,71,0.25); }
+.btn-primary:active { transform: translateY(1px); }
+.btn-primary:disabled { opacity: 0.4; cursor: not-allowed; transform: none; }
+
+.btn-secondary {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 9px 18px;
+  font-size: 13px;
+  font-weight: 500;
+  letter-spacing: 0.01em;
+  color: var(--text-secondary);
+  background: var(--surface-2);
+  border: 1px solid var(--surface-border);
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 180ms ease;
+}
+.btn-secondary:hover { color: var(--text-primary); border-color: var(--surface-border-hover); background: var(--surface-3); }
+.btn-secondary:disabled { opacity: 0.4; cursor: not-allowed; }
+
+.btn-ghost {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 12px;
+  font-size: 12px;
+  font-weight: 500;
+  color: var(--text-muted);
+  background: transparent;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: all 150ms ease;
+}
+.btn-ghost:hover { color: var(--text-secondary); background: var(--surface-2); }
+
+/* =============================================
+   NAV TABS — Minimal underline style
+   ============================================= */
+
+.nav-tab {
+  position: relative;
+  padding: 6px 12px;
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--text-muted);
+  background: transparent;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: color 150ms ease;
+  white-space: nowrap;
+}
+.nav-tab:hover { color: var(--text-secondary); }
+.nav-tab.active { color: var(--text-primary); }
+.nav-tab.active::after {
+  content: '';
+  position: absolute;
+  bottom: -1px;
+  left: 12px;
+  right: 12px;
+  height: 1.5px;
+  background: var(--accent);
+  border-radius: 1px;
+}
+
+/* =============================================
+   METRIC CARDS — Bold numbers, clean labels
+   ============================================= */
+
+.metric-card {
+  background: var(--surface-1);
+  border: 1px solid var(--surface-border);
+  border-radius: 12px;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  transition: border-color 200ms ease;
+}
+.metric-card:hover { border-color: var(--surface-border-hover); }
+
+.metric-number {
+  font-size: 36px;
+  font-weight: 800;
+  line-height: 1;
+  letter-spacing: -0.02em;
+  color: var(--text-primary);
+}
+
+.metric-label {
+  font-size: 11px;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--text-muted);
+}
+
+/* =============================================
+   CODE BLOCKS — Monospaced precision
+   ============================================= */
+
+.code-block {
+  background: var(--surface-3);
+  border: 1px solid var(--surface-border);
+  border-radius: 8px;
+  padding: 16px;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 12px;
+  line-height: 1.7;
+  color: #A8B3CF;
+  overflow-x: auto;
+}
+
+.code-block .line-number {
+  user-select: none;
+  margin-right: 16px;
+  color: var(--text-muted);
+  min-width: 2ch;
+  display: inline-block;
+  text-align: right;
+}
+
+/* =============================================
+   DIVIDERS — Subtle editorial marks
+   ============================================= */
+
+.divider {
+  width: 100%;
+  height: 1px;
+  background: var(--surface-border);
+}
+
+.divider-vertical {
+  width: 1px;
+  height: 100%;
+  background: var(--surface-border);
+}
+
+/* =============================================
+   PROGRESS BARS
+   ============================================= */
+
+.progress-track {
+  width: 100%;
+  height: 3px;
+  background: var(--surface-3);
+  border-radius: 99px;
+  overflow: hidden;
+}
+
+.progress-fill {
+  height: 100%;
+  border-radius: 99px;
+  background: var(--accent);
+  transition: width 600ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.progress-fill-green {
+  background: var(--status-green);
+}
+
+/* =============================================
+   ANIMATED ELEMENTS
+   ============================================= */
+
+@keyframes pulse-dot {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.5; transform: scale(0.85); }
+}
+
+@keyframes slide-up {
+  from { opacity: 0; transform: translateY(12px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes fade-in {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes shimmer {
+  0% { background-position: -200% center; }
+  100% { background-position: 200% center; }
+}
+
+@keyframes spin-slow {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+.animate-pulse-dot { animation: pulse-dot 2s ease-in-out infinite; }
+.animate-slide-up { animation: slide-up 400ms var(--ease-smooth) forwards; }
+.animate-fade-in { animation: fade-in 300ms ease forwards; }
+.animate-spin-slow { animation: spin-slow 3s linear infinite; }
+
+.shimmer-text {
+  background: linear-gradient(90deg, var(--text-secondary) 0%, var(--text-primary) 50%, var(--text-secondary) 100%);
+  background-size: 200% auto;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: shimmer 2.5s linear infinite;
+}
+
+/* Stagger children */
+.stagger-children > *:nth-child(1) { animation-delay: 0ms; }
+.stagger-children > *:nth-child(2) { animation-delay: 60ms; }
+.stagger-children > *:nth-child(3) { animation-delay: 120ms; }
+.stagger-children > *:nth-child(4) { animation-delay: 180ms; }
+.stagger-children > *:nth-child(5) { animation-delay: 240ms; }
+
+/* =============================================
+   GRID LINES — Very subtle editorial grid
+   ============================================= */
+
+.grid-lines {
+  background-image:
+    linear-gradient(to right, rgba(255,255,255,0.02) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(255,255,255,0.02) 1px, transparent 1px);
+  background-size: 48px 48px;
+}
+
+/* =============================================
+   GLOW ACCENTS — Restrained
+   ============================================= */
+
+.glow-gold {
+  box-shadow: 0 0 0 1px rgba(232,197,71,0.2), 0 0 20px rgba(232,197,71,0.06);
+}
+
+.glow-indigo {
+  box-shadow: 0 0 0 1px rgba(124,156,245,0.2), 0 0 20px rgba(124,156,245,0.06);
+}
+
+.glow-green {
+  box-shadow: 0 0 0 1px rgba(34,197,94,0.2), 0 0 16px rgba(34,197,94,0.06);
+}
+
+/* =============================================
+   TOOLTIP STYLE
+   ============================================= */
+
+.tooltip-content {
+  background: var(--surface-3);
+  border: 1px solid var(--surface-border);
+  border-radius: 8px;
+  padding: 8px 12px;
+  font-size: 12px;
+  color: var(--text-secondary);
+  box-shadow: 0 8px 24px rgba(0,0,0,0.4);
+}
+
+/* Recharts overrides */
+.recharts-tooltip-wrapper .recharts-default-tooltip {
+  background: var(--surface-2) !important;
+  border: 1px solid var(--surface-border) !important;
+  border-radius: 8px !important;
+}
+
+/* =============================================
+   LOADING SKELETON
+   ============================================= */
+
+@keyframes skeleton-wave {
+  0% { background-position: 200% 0; }
+  100% { background-position: -200% 0; }
+}
+
+.skeleton {
+  background: linear-gradient(90deg, var(--surface-2) 25%, var(--surface-3) 50%, var(--surface-2) 75%);
+  background-size: 200% 100%;
+  animation: skeleton-wave 1.8s ease-in-out infinite;
+  border-radius: 6px;
+}
+
+/* =============================================
+   SECTION HEADERS — Editorial style
+   ============================================= */
+
+.section-eyebrow {
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--accent);
+  font-family: 'JetBrains Mono', monospace;
+}
+
+.section-title {
+  font-size: 22px;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  color: var(--text-primary);
+  line-height: 1.2;
+}
+
+/* =============================================
+   VERDICT ACCORDION
+   ============================================= */
+
+.verdict-row {
+  background: var(--surface-1);
+  border: 1px solid var(--surface-border);
+  border-radius: 10px;
+  overflow: hidden;
+  transition: border-color 200ms ease, box-shadow 200ms ease;
+}
+.verdict-row:hover { border-color: var(--surface-border-hover); }
+.verdict-row.open {
+  border-color: rgba(232,197,71,0.2);
+  box-shadow: 0 0 0 1px rgba(232,197,71,0.06);
+}
+
+/* =============================================
+   MISC UTILITIES
+   ============================================= */
+
+.truncate-2 {
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.no-select { user-select: none; }
+
+.link-inline {
+  color: var(--accent);
+  text-decoration: none;
+  border-bottom: 1px solid transparent;
+  transition: border-color 150ms ease;
+}
+.link-inline:hover { border-color: rgba(232,197,71,0.5); }
